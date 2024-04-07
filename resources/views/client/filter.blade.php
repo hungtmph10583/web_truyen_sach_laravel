@@ -28,7 +28,7 @@
                                             <li>{{ $_c->c_name }}</li>
                                             @endforeach
                                         </ul>
-                                        <span><i class="fa fa-eye"></i> 19.141 Lượt đọc</span>
+                                        <span><i class="fa fa-eye"></i> {{ $story->s_view }} Lượt đọc</span>
                                     </div>
                                 </div>
                             </div>
@@ -39,7 +39,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12">
+                <div class="col-lg-4 col-md-12 sidebar__category">
                     <div class="book-list mb-5">
                         <div class="section-title">
                             <h5>Thể loại truyện</h5>

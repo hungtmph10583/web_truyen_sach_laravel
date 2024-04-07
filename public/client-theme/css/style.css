@@ -36,7 +36,8 @@ body {
 	height: 100%;
 	font-family: "Mulish", sans-serif;
 	-webkit-font-smoothing: antialiased;
-	background: #0b0c2a;
+	background-color: #e5e5e5;
+	/* background-color: #6b6e70; */
 }
 
 h1,
@@ -99,7 +100,7 @@ a:hover,
 a:focus {
 	text-decoration: none;
 	outline: none;
-	color: #ffffff;
+	color: #17a2b8;
 }
 
 ul,
@@ -118,7 +119,7 @@ ol {
 
 .section-title h4,
 .section-title h5 {
-	color: #ffffff;
+	color: #333333;
 	font-weight: 600;
 	line-height: 21px;
 	text-transform: uppercase;
@@ -134,7 +135,7 @@ ol {
 	top: -6px;
 	height: 32px;
 	width: 4px;
-	background: #e53637;
+	background: #17a2b8;
 	content: "";
 }
 
@@ -169,7 +170,7 @@ ol {
 	font-size: 13px;
 	font-weight: 700;
 	text-transform: uppercase;
-	color: #ffffff;
+	color: #333333;
 	letter-spacing: 2px;
 }
 
@@ -275,59 +276,48 @@ ol {
 	cursor: pointer;
 }
 
-.search-model {
-	display: none;
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	left: 0;
-	top: 0;
-	background: #000;
-	z-index: 99999;
+.search {
+	display: block;
+	position: relative;
 }
 
-.search-model-form {
-	padding: 0 15px;
+.search input[type="search"] {
+width: 100%;
+padding: 10px 0 10px 15px;
+border: none;
+border-radius: 10px;
+background-color: #F5F5F5;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.search-model-form input {
-	width: 500px;
-	font-size: 40px;
-	border: none;
-	border-bottom: 2px solid #333;
-	background: 0 0;
-	color: #999;
+.search button[type="submit"] {
+background-color: #1d1e39;
+border: none;
+color: #fff;
+cursor: pointer;
+padding: 10px 20px;
+border-radius: 0 10px 10px 0;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+position: absolute;
+top: 0;
+right: 0;
+transition: .9s ease;
 }
 
-.search-close-switch {
-	position: absolute;
-	width: 50px;
-	height: 50px;
-	background: #333;
-	color: #fff;
-	text-align: center;
-	border-radius: 50%;
-	font-size: 28px;
-	line-height: 28px;
-	top: 30px;
-	cursor: pointer;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	-webkit-box-pack: center;
-	-ms-flex-pack: center;
-	justify-content: center;
+.search button[type="submit"]:hover {
+color: #17a2b8;
 }
+  
+  
+  
 
 /*---------------------
   Header
 -----------------------*/
 
 .header {
-	background: #070720;
+	/* background: #070720; */
+	box-shadow: 0 0 #0000,0 0 #0000, 0 0 #0000,0 0 #0000,0 25px 50px -12px rgba(0,0,0,.25)!important;
 }
 
 .header__logo {
@@ -350,12 +340,12 @@ ol {
 }
 
 .header__menu ul li.active a {
-	background: #e53637;
+	background: #17a2b8;
 	color: #ffffff;
 }
 
 .header__menu ul li:hover a {
-	color: #ffffff;
+	color: #17a2b8;
 }
 
 .header__menu ul li:hover .dropdown {
@@ -395,16 +385,20 @@ ol {
 
 .header__menu ul li .dropdown li a {
 	font-size: 14px;
-	color: #111111;
-	font-weight: 500;
+	color: #333333;
+	font-weight: 600;
 	padding: 5px 20px;
+}
+
+.header__menu ul li .dropdown li a:hover{
+	color: #17a2b8;
 }
 
 .header__menu ul li a {
 	font-size: 15px;
-	color: #b7b7b7;
+	color: #333333;
 	display: block;
-	font-weight: 700;
+	font-weight: 600;
 	-webkit-transition: all, 0.5s;
 	-o-transition: all, 0.5s;
 	transition: all, 0.5s;
@@ -425,7 +419,7 @@ ol {
 .header__right a {
 	display: inline-block;
 	font-size: 14px;
-	color: #ffffff;
+	color: #333333;
 	margin-right: 30px;
 }
 
@@ -856,7 +850,7 @@ ol {
 .product__item__text ul li {
 	list-style: none;
 	font-size: 10px;
-	color: #ffffff;
+	color: #323232;
 	font-weight: 700;
 	padding: 1px 10px;
 	background: rgba(255, 255, 255, 0.2);
@@ -865,14 +859,18 @@ ol {
 }
 
 .product__item__text h5 a {
-	color: #ffffff;
+	color: #333333;
 	font-weight: 700;
 	line-height: 26px;
 	font-size: 15px;
 }
 
+.product__item__text h5 a:hover{
+	color: #17a2b8;;
+}
+
 .product__sidebar .section-title h5 {
-	color: #ffffff;
+	color: #333333;
 	font-weight: 600;
 	font-family: "Oswald", sans-serif;
 	line-height: 21px;
@@ -887,7 +885,7 @@ ol {
 	top: -6px;
 	height: 32px;
 	width: 4px;
-	background: #e53637;
+	background: #17a2b8;
 	content: "";
 }
 
@@ -997,7 +995,7 @@ ol {
 	color: #ffffff;
 	font-weight: 700;
 	padding: 1px 10px;
-	background: rgba(255, 255, 255, 0.2);
+	background: #3d3d3d;
 	border-radius: 5px;
 	display: inline-block;
 }
@@ -1007,9 +1005,13 @@ ol {
 }
 
 .product__sidebar__comment__item__text h5 a {
-	color: #ffffff;
+	color: #333333;
 	font-weight: 700;
 	line-height: 26px;
+}
+
+.product__sidebar__comment__item__text h5 a:hover{
+	color: #17a2b8;
 }
 
 .product__sidebar__comment__item__text span {
@@ -1104,11 +1106,26 @@ ol {
 -----------------------*/
 
 .anime-details {
-	padding-top: 60px;
+	margin-top: 35px;
+	padding-bottom: 100px;
+}
+
+.sidebar__category{
+	background-color: #ffffff;
+	/* width: 1170px; */
+	/* margin: 35px auto 0;
+	padding: 24px 14px; */
+	padding: 24px;
+	border-radius: 5px;
+	box-shadow: 0 0 #0000,0 0 #0000, 0 0 #0000,0 0 #0000,0 25px 50px -12px rgba(0,0,0,.25)!important;
 }
 
 .anime__details__content {
-	margin-bottom: 65px;
+	margin-bottom: 25px;
+	padding: 24px;
+	background-color: #ffffff;
+	border-radius: 5px;
+	box-shadow: 0 0 #0000,0 0 #0000, 0 0 #0000,0 0 #0000,0 25px 50px -12px rgba(0,0,0,.25)!important;
 }
 
 .anime__details__text {
@@ -1127,7 +1144,7 @@ ol {
 	width: 100%;
 	height:200px;
 	background: none;
-	color: #b7b7b7;
+	color: #3d3d3d;
 	border: none;
 	padding: 5px;
 }
@@ -1150,7 +1167,7 @@ ol {
 {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #e53637;
+	background-color: #17a2b8;
 }
 
 .anime__details__pic {
@@ -1188,14 +1205,14 @@ ol {
 }
 
 .anime__details__title h3 {
-	color: #ffffff;
+	color: #333333;
 	font-weight: 700;
 	margin-bottom: 13px;
 }
 
 .anime__details__title span{
 	font-size: 15px;
-	color: #b7b7b7;
+	color: #333333;
 	display: block;
 }
 
@@ -1234,7 +1251,7 @@ ol {
 .anime__details__widget ul li {
 	list-style: none;
 	font-size: 15px;
-	color: #ffffff;
+	color: #262626;
 	line-height: 30px;
 	position: relative;
 	padding-left: 18px;
@@ -1246,13 +1263,13 @@ ol {
 	top: 12px;
 	height: 6px;
 	width: 6px;
-	background: #b7b7b7;
+	background: #262626;
 	border-radius: 50%;
 	content: "";
 }
 
 .anime__details__widget ul li span {
-	color: #b7b7b7;
+	color: #262626!important;
 	width: 115px;
 	display: inline-block;
 	font-weight: 800;
@@ -1309,21 +1326,30 @@ ol {
 	border-radius: 0 4px 4px 0;
 }
 /* -------------------- */
+.tab-content{
+	padding: 24px;
+	background-color: #ffffff;
+	border-radius: 5px;
+	box-shadow: 0 0 #0000,0 0 #0000, 0 0 #0000,0 0 #0000,0 25px 50px -12px rgba(0,0,0,.25)!important;
+}
+
 .chapter-list{
 	display: flex;
+	gap: 10px;
     margin-bottom: 30px;
     flex-wrap: wrap;
 	list-style: none;
 }
 .chapter-list li{
-	width: 50%;
+	width: 48.5%;
     border-bottom: 1px solid #262626;
     padding-right: 30px;
     position: relative;
 }
 .chapter-list li a{
 	display: block;
-    color: #ffffff;
+    color: #333333;
+	font-weight: 600;
     line-height: 40px;
     overflow: hidden;
     white-space: nowrap;
@@ -1348,7 +1374,7 @@ ol {
     width: 35px;
     height: 35px;
     margin: 0 2px;
-    background:rgba(255, 255, 255, 0.2);
+    background:#17a2b8;
     border-radius: 4px;
     cursor: pointer;
     border: 1px solid transparent;
@@ -1359,15 +1385,14 @@ ol {
     width: 100%;
     height: 100%;
     left: 0;
-	color: #888;
+	color: #ffffff;
     font-size: 15px;
     line-height: 32px;
     transition: all .5s;
 	border-radius: 4px;
 }
 .chapter-pagination li.active, .chapter-pagination li a:hover{
-    background-color: #fff;
-    color: #000000;
+    background-color: #138496;
 }
 /* -------------------- */
 
@@ -1376,9 +1401,9 @@ ol {
 */
 
 .book-list .book-categories{
-	padding: 18px;
-    background-color: #1d1e39;
-    border-radius: 10px;
+	/* padding: 18px; */
+    /* background-color: #1d1e39; */
+    /* border-radius: 10px; */
     list-style: none;
 	display: flex;
     flex-wrap: wrap;
@@ -1392,8 +1417,8 @@ ol {
 
 .book-list .book-categories li a{
 	font-size: 14px;
-	color: #ffffff;
-	font-weight: 600;
+	color: #333333;
+	font-weight: 700;
 }
 
 .book-list .book-categories li a:hover{
@@ -1489,15 +1514,32 @@ ol {
 /*---------------------
   (hungtmph10583) Read Chapter
 -----------------------*/
+.text__story--title{
+	font-size: 30px;
+	color: #333333;
+	padding: 10px 0;
+}
+
+.text__chapter--title{
+	font-size: 15px;
+	color: #333333;
+}
+
+.content__chapter{
+	background-color: #ffffff;
+	padding: 24px 54px;
+	border-radius: 5px;
+	box-shadow: 0 0 #0000,0 0 #0000, 0 0 #0000,0 0 #0000,0 25px 50px -12px rgba(0,0,0,.25)!important;
+}
 
 .story__read__chapter {
 	margin-bottom: 70px;
-	color: #fff;
-	font-size: 20px;
+	color: #333333;
+	font-size: 24px;
 }
 
 .story__read__chapter p{
-	color: #fff;
+	color: #333333;
 	font-size: 20px;
 }
 .custom_select_chapters{
@@ -1620,20 +1662,32 @@ ol {
 -----------------------*/
 
 .breadcrumb-option {
-	padding-top: 35px;
+	margin: 35px auto 0;
+}
+
+.breadcrumb__links{
+	padding: 25px 15px;
+	border-radius: 5px;
+	box-shadow: 0 0 #0000,0 0 #0000, 0 0 #0000,0 0 #0000,0 25px 50px -12px rgba(0,0,0,.25)!important;
+	background-color: #ffffff;
 }
 
 .breadcrumb__links a {
 	font-size: 15px;
-	color: #ffffff;
+	color: #333333;
+	font-weight: 700;
 	margin-right: 18px;
 	display: inline-block;
 	position: relative;
 }
 
+.breadcrumb__links a:hover {
+	color: #17a2b8;
+}
+
 .breadcrumb__links a i {
 	margin-right: 5px;
-	color: #e53637;
+	color: #333333;
 }
 
 .breadcrumb__links a:after {
@@ -1646,7 +1700,7 @@ ol {
 
 .breadcrumb__links span {
 	font-size: 15px;
-	color: #b7b7b7;
+	color: #138496;
 	display: inline-block;
 }
 
@@ -2523,6 +2577,12 @@ ol {
 		border-radius: 0;
 		background: transparent;
 		color: #111111;
+	}
+	.content__chapter{
+		padding: 24px;
+	}
+	.story__read__chapter{
+		font-size: 18px;
 	}
 	.product__sidebar {
 		padding-top: 50px;

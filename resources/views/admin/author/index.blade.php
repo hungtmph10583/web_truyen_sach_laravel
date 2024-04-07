@@ -68,15 +68,15 @@
                                     </td>
                                     <td data-field="Type" class="m-datatable__cell">
                                         <span style="width: 300px;">
-                                            @if($item->stories->isEmpty())
+                                            @if($item->stories_count <= 0)
                                                 <p class="m--font-bold m--font-secondary"><mark>This author does not have any stories</mark></p>
                                             @else
-                                                <span class="m-badge m-badge--secondary m-badge--wide m-badge--rounded mb-2">{{ count($item->stories) }}</span>
+                                                <span class="m-badge m-badge--secondary m-badge--wide m-badge--rounded mb-2">{{ $item->stories_count }}</span>
                                             @endif
                                         </span>
                                     </td>
                                     <td data-field="ShipDate" class="m-datatable__cell">
-                                        <span style="width: 150px;">{{ $item->created_at->format('d M Y, H:i a') }}</span>
+                                        <span style="width: 150px;">{{ $item->created_at->diffForHumans() }}</span>
                                     </td>
                                     <td data-field="Actions" class="m-datatable__cell text-right">
                                         <span style="overflow: visible; position: relative; width: 110px; float: right;">

@@ -16,7 +16,13 @@ use Illuminate\Validation\Rule;
 
 class StoryController extends Controller
 {
-    public function __construct() {
+    public function __construct()
+    {
+        // $this->middleware('permission:add story|edit story|delete story');
+        // $this->middleware('permission:show story', ['only' => ['create','index']]);
+        $this->middleware('permission:create story', ['only' => ['create','store']]);
+        $this->middleware('permission:update story', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete story', ['only' => ['destroy']]);
         view()->share('activeStory', TRUE);
     }
 
@@ -30,16 +36,28 @@ class StoryController extends Controller
             $storiesQuery = Story::select(['id','s_name','s_slug','s_status','s_author_id','s_total_chapter'])->where('s_name', 'like', '%' . $request->keyword . '%')->with('author:id,a_name', 'categories:id,c_name');
             $stories = $storiesQuery->latest('id')->paginate($pageSize)->appends($searchData);
         }
+        // $stories = Story::select(['id','s_name','s_slug','s_thumbnail','s_status'])->with('categories:id,c_name')->get();
+        // $stories = Story::select(['id','s_name','s_slug','s_thumbnail','s_status','updated_at'])->get();
+        
+        // return response()->json($stories);
         /**use `select` to get the necessary data from column useless then show it on the screen */
-        // $stories = Story::select(['id','s_name','s_slug','s_status','s_author_id','s_total_chapter'])->latest('id')->with('author:id,a_name', 'categories:id,c_name')->paginate(10);
-        view()->share('activeStoryList', TRUE);
+        view()->share('activeStory', TRUE);
         return view('admin.story.index', compact('stories', 'searchData'));
+    }
+
+    public function api()
+    {
+        $stories = Story::select(['id','s_name','s_slug','s_thumbnail','s_status','updated_at'])->take(10)->get();
+        return response([
+            'data' => $stories,
+            'status' => 200
+        ]);
     }
 
     public function create()
     {
         $categories = Category::select(['id','c_name'])->latest('id')->get();
-        // $authors    = Author::select(['id','a_name'])->latest('id')->get();
+        $authors    = Author::select(['id','a_name'])->latest('id')->get();
         view()->share('activeStoryAdd', TRUE);
         return view('admin.story.create', compact('categories', 'authors'));
     }
@@ -62,7 +80,7 @@ class StoryController extends Controller
                 // 's_thumbnail.required' => 'Upload the thumbnail of the story!'
             ]
         );
-        $checkAuthorExists = Author::where('a_slug', \Str::slug($request->s_author_id))->first();
+        $checkAuthorExists = Author::select('id','a_name')->where('a_slug', \Str::slug($request->s_author_id))->first();
         if (!$checkAuthorExists) {
             $author = new Author();
             $author->a_name = $request->add_new_author;
@@ -93,8 +111,9 @@ class StoryController extends Controller
 
     public function show($s_slug)
     {
-        $story = Story::where('s_slug', $s_slug)->first();
+        $story = Story::with('author:id,a_name')->where('s_slug', $s_slug)->first();
         $chapters = Chapter::select(['c_name','c_slug'])->where('c_story_id', $story->id)->get();
+        // return response()->json($story);
         $viewData = [
             'story'     => $story,
             'chapters'  => $chapters,
@@ -105,8 +124,8 @@ class StoryController extends Controller
     public function edit($s_slug)
     {
         $story = Story::where('s_slug', $s_slug)->first();
-        $categories = Category::all();
-        $select = DB::table('stories_categories')->where('sc_story_id', $story->id)->get();
+        $categories = Category::select(['id','c_name'])->get();
+        $select = DB::table('stories_categories')->select('sc_category_id')->where('sc_story_id', $story->id)->get();
         
         return view('admin.story.edit', compact('story', 'categories', 'select'));
     }
@@ -139,7 +158,7 @@ class StoryController extends Controller
         );
 
         /**Check author exsits or not */
-        $checkAuthorExists = Author::where('a_slug', \Str::slug($request->s_author_id))->first();
+        $checkAuthorExists = Author::select('id','a_name')->where('a_slug', \Str::slug($request->s_author_id))->first();
         if (!$checkAuthorExists) {
             /**If the author does not exsits then save the author in data and get the author's id */
             $author = new Author();
@@ -180,7 +199,7 @@ class StoryController extends Controller
         }
 
         /**Delete all categories of the story in stories_categories table */
-        $story->categories()->attach();
+        StoryCategory::whereIn('sc_story_id',[$story->id])->delete();
         /**Delete the story thumbnails in the folder*/
         // $path = 'storage/' . $story->s_thumbnail;
         // if (file_exists($path)) {
@@ -188,6 +207,6 @@ class StoryController extends Controller
         // }
         /**Delete story when conditions are met */
         $story->delete();
-        return redirect()->route('story.index')->with('success', 'Story deteled successfully');
+        return redirect()->route('story.index')->with('success', 'Story deteted successfully');
     }
 }

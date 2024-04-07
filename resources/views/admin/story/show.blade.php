@@ -32,7 +32,9 @@
                                 <span class="m-nav__link-title">
                                     <span class="m-nav__link-wrap">
                                         <span class="m-nav__link-text">Author</span>
-                                        <span class="m-nav__link-badge">{{ $story->author->a_name }}</span>
+                                        <span class="m-nav__link-badge">
+                                            {{ $story->author->a_name ?? "Unknow" }}
+                                        </span>
                                     </span>
                                 </span>
                             </a>
@@ -184,7 +186,7 @@
                                 <div class="form-group m-form__group row">
                                     <label for="example-text-input" class="col-2 col-form-label">Author</label>
                                     <div class="col-7">
-                                        <input class="form-control m-input" type="text" value="{{ $story->author->a_name }}" disabled>
+                                        <input class="form-control m-input" type="text" value="{{ $story->author->a_name ?? 'Unknow' }}" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group m-form__group row">

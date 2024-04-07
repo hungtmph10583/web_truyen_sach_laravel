@@ -16,7 +16,7 @@
     <!-- Breadcrumb End -->
 
     <!-- Anime Section Begin -->
-    <section class="anime-details spad">
+    <section class="anime-details">
         <div class="container">
             <div class="row">
                 <div class="col-lg-9 col-md-12">
@@ -24,8 +24,8 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="anime__details__pic set-bg" data-setbg="{{ $story->s_thumbnail }}">
-                                    <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                    <!-- <div class="comment"><i class="fa fa-comments"></i> 11</div> -->
+                                    <div class="view"><i class="fa fa-eye"></i> {{ $story->s_view }}</div>
                                 </div>
                             </div>
                             <div class="col-lg-8">
@@ -37,7 +37,7 @@
                                             <a href="#">{{ $story->author->a_name }}</a>
                                         </span>
                                     </div>
-                                    <div class="anime__details__rating">
+                                    <!-- <div class="anime__details__rating">
                                         <div class="rating">
                                             <a href="#"><i class="fa fa-star"></i></a>
                                             <a href="#"><i class="fa fa-star"></i></a>
@@ -46,14 +46,14 @@
                                             <a href="#"><i class="fa fa-star-half-o"></i></a>
                                         </div>
                                         <span>1.029 Votes</span>
-                                    </div>
+                                    </div> -->
                                     <div class="anime__details__widget">
                                         <ul>
                                             <li><span>Tình trạng:</span> {{ $story->getStatus($story->s_status)['name'] }}</li>
-                                            <li><span>Luợt xem:</span> 2.210</li>
                                             <li><span>Thể loại:</span> @foreach($story->categories as $category) <a href="{{ route('client.category', [$category->c_slug]) }}" class="category">{{ $category->c_name ?? "[N\A]" }}</a> @endforeach</li>
                                             <li><span>Lần cuối:</span> {{ $story->updated_at->format('d/m/Y') }}</li>
-                                            <li><span>Lượt xem:</span> 9141</li>
+                                            <li><span>Lượt xem:</span> {{ $story->s_view }}</li>
+                                            <li><span>Chương mới:</span> <a href="{{ route('client.chapter', [$story->s_slug, $recent_chapter->c_slug]) }}">{{ $recent_chapter->c_name }}</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -70,68 +70,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="anime__details__review">
-                        <div class="section-title">
-                            <h5>Danh sách chương</h5>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="{{ asset('client-theme/img/anime/review-1.jpg') }}" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                                <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                "demons" LOL</p>
-                            </div>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="{{ asset('client-theme/img/anime/review-2.jpg') }}" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                <p>Finally it came out ages ago</p>
-                            </div>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="{{ asset('client-theme/img/anime/review-3.jpg') }}" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                                <p>Where is the episode 15 ? Slow update! Tch</p>
-                            </div>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="{{ asset('client-theme/img/anime/review-4.jpg') }}" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                                <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                "demons" LOL</p>
-                            </div>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="{{ asset('client-theme/img/anime/review-5.jpg') }}" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                                <p>Finally it came out ages ago</p>
-                            </div>
-                        </div>
-                        <div class="anime__review__item">
-                            <div class="anime__review__item__pic">
-                                <img src="{{ asset('client-theme/img/anime/review-6.jpg') }}" alt="">
-                            </div>
-                            <div class="anime__review__item__text">
-                                <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                                <p>Where is the episode 15 ? Slow update! Tch</p>
-                            </div>
-                        </div>
-                    </div> -->
-                    
                     <div class="tab-content" id="directory" style="display: block;">
                         <ul class="chapter-list">
                             @foreach($chapters as $chapter)
@@ -146,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-12">
+                <div class="col-lg-3 col-md-12 sidebar__category">
                     <div class="book-list mb-5">
                         <div class="section-title">
                             <h5>Thể loại truyện</h5>
@@ -173,7 +111,7 @@
                                     <li>{{ $_c->c_name }}</li>
                                     @endforeach
                                 </ul>
-                                <span><i class="fa fa-eye"></i> 19.141 Lượt đọc</span>
+                                <span><i class="fa fa-eye"></i> {{ $story->s_view }} Lượt đọc</span>
                             </div>
                         </div>
                         @endforeach

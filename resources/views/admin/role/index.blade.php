@@ -48,7 +48,7 @@
                         <div class="m-form__actions m-form__actions">
                             <a href="{{ route('role.show', [$item->id]) }}" class="btn btn-secondary">View Role</a>
                             <a href="{{ route('role.edit', [$item->id]) }}" class="btn btn-secondary">Edit Role</a>
-                            <a href="javascript:void(0);" data-href="{{ route('role.destroy', [$item->id]) }}" title="Delete" class="btn btn-secondary delete_role">Delete Role</a>
+                            <!-- <a href="javascript:void(0);" data-href="{{ route('role.destroy', [$item->id]) }}" title="Delete" class="btn btn-secondary delete_role">Delete Role</a> -->
                         </div>
                     </div>
                 </div>

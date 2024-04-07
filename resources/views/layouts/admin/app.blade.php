@@ -1,23 +1,11 @@
 <!DOCTYPE html>
 
-<!-- 
-Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 4
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-Renew Support: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
 <html lang="en">
 
 	<!-- begin::Head -->
 	<head>
 		<meta charset="utf-8" />
-		<title>@yield('title', "Khi Den 2 Ten")</title>
+		<title>@yield('title', "Truyện Nhảm")</title>
 		<meta name="description" content="Latest updates and statistic charts">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
 		<meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -70,18 +58,7 @@ License: You must have a valid license purchased only from themeforest(the above
 											<i class="m-nav__link-icon la la-home"></i>
 										</a>
 									</li>
-									<li class="m-nav__separator">-</li>
-									<li class="m-nav__item">
-										<a href="" class="m-nav__link">
-											<span class="m-nav__link-text">Utils</span>
-										</a>
-									</li>
-									<li class="m-nav__separator">-</li>
-									<li class="m-nav__item">
-										<a href="" class="m-nav__link">
-											<span class="m-nav__link-text">Idle Timer</span>
-										</a>
-									</li>
+									@yield('subheader__breadcrumbs')
 								</ul>
 							</div>
 						</div>

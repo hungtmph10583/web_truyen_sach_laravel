@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\StoryController;
+use App\Http\Controllers\Client\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+Route::get('/story', [StoryController::class, 'api'])->name('api.story');
+Route::get('/truyen/{s_slug}/{c_slug}', [ApiController::class, 'chapter'])->name('api.chapter');

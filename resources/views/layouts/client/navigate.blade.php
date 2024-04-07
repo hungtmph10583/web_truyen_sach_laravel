@@ -10,7 +10,5 @@
                 <li><a href="{{ route('client.filter', ['truyen-xem-nhieu-nhat']) }}">Xem nhiều</a></li>
             </ul>
         </li>
-        <!-- <li><a href="#">Thể loại truyện</a></li>
-        <li><a href="#">Contacts</a></li> -->
     </ul>
 </nav>

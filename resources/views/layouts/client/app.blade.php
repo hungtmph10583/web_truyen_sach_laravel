@@ -32,15 +32,11 @@
             <div class="col-12">
                 <form action="{{ route('client.search') }}" autocomplete="off" class="" method="POST">
                     @csrf
-                    <!-- <input type="search" id="keywords" name="keyword" class="form-control" placeholder="Tìm kiếm truyện..." aria-label="Search" /> -->
-                    <div class="input-group">
-                        <input type="search" id="keywords" name="keyword" class="form-control" placeholder="Tìm kiếm truyện..." aria-label="Search" />
-                        <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit" id="clickButton">
-                            <i class="fa fa-search"></i>
-                        </button>
-                        </div>
-                    </div>  
+                    <div class="search">
+                        <input type="search" id="keywords" name="keyword" placeholder="Tìm kiếm truyện..." aria-label="Search">
+                        <button type="submit" id="clickButtonSubmit">Tìm Kiếm</button>
+                    </div>
+
                 </form>
                 <div id="search_ajax" class="search_ajax position-absolute"></div>
             </div>
@@ -61,29 +57,27 @@
 <script type="text/javascript">
     $('#keywords').keyup( function() {
         var keywords = $(this).val();
-        // setTimeout(function() { 
-            if (keywords != '') {
-                var _token = $('input[name="_token"]').val();
+        if (keywords != '') {
+            var _token = $('input[name="_token"]').val();
 
-                $.ajax({
-                    url:"{{ url('/timkiem-ajax') }}",
-                    method:"POST",
-                    data:{keywords:keywords, _token:_token},
-                    success:function(data){
-                        $('#search_ajax').fadeIn();
-                        $('#search_ajax').html(data);
-                    }
-                });
-            }else{
-                $('#search_ajax').fadeOut();
-            }
-        // }, 2000);
+            $.ajax({
+                url:"{{ url('/timkiem-ajax') }}",
+                method:"POST",
+                data:{keywords:keywords, _token:_token},
+                success:function(data){
+                    $('#search_ajax').fadeIn();
+                    $('#search_ajax').html(data);
+                }
+            });
+        }else{
+            $('#search_ajax').fadeOut();
+        }
     });
 
     $(document).on('click', '.li_search_ajax', function(){
         $('#keywords').val($(this).text());
         $('#search_ajax').fadeOut();
-        var button = document.getElementById('clickButton');
+        var button = document.getElementById('clickButtonSubmit');
         button.form.submit();
     });
 </script>

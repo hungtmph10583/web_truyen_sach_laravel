@@ -24,11 +24,9 @@ use Doctrine\DBAL\Driver\Middleware;
 */
 
 
-// Route::middleware('auth')->group(function(){
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
-
+Route::group(['middleware' => ['permission:admin attribute']], function (){
+    
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
     Route::prefix('category')->group(function () {
@@ -122,4 +120,4 @@ use Doctrine\DBAL\Driver\Middleware;
         Route::get('destroy/{id}', [PermissionController::class, 'destroy'])->name('permission.destroy');
     });
 
-// });
+});

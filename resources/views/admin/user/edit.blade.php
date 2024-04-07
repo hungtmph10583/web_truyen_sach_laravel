@@ -105,16 +105,16 @@
                                 <label class="col-lg-2 col-form-label">Avatar</label>
                                 <div class="col-lg-8">
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="uploadImage" name="avatar">
+                                        <input type="file" class="custom-file-input" id="uploadImage" name="uploadfile">
                                         <label class="custom-file-label" for="Chọn file">Select file image</label>
                                     </div>
-                                    @error('avatar')
+                                    @error('uploadfile')
                                         <span class="form__help text-danger">{{$message}}</span>
                                     @enderror
                                 </div>
                             </div>
                             <div class="m-form__group form-group row">
-                                <label class="col-lg-2 col-form-label">Role:</label>
+                                <label class="col-lg-2 col-form-label">Role</label>
                                 <div class="col-lg-8">
                                     @if(Auth::user()->hasRole('Administrator'))
                                         <div class="dropdown bootstrap-select form-control m-bootstrap-select m_">

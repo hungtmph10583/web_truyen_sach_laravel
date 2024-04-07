@@ -10,39 +10,26 @@
                     <span class="m-menu__link-title">
                         <span class="m-menu__link-wrap">
                             <span class="m-menu__link-text">Dashboard</span>
-                            <span class="m-menu__link-badge">
+                            <!-- <span class="m-menu__link-badge">
                                 <span class="m-badge m-badge--danger">2</span>
-                            </span>
+                            </span> -->
                         </span>
                     </span>
                 </a>
             </li>
             <li class="m-menu__section ">
-                <h4 class="m-menu__section-text">admin</h4>
+                <h4 class="m-menu__section-text">Story</h4>
                 <i class="m-menu__section-icon flaticon-more-v2"></i>
             </li>
-            <li class="m-menu__item  m-menu__item--submenu {{ isset($activeStory) ? 'm-menu__item--open' : '' }}" aria-haspopup="true" m-menu-submenu-toggle="hover">
-                <a href="javascript:;" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon flaticon-layers"></i>
-                    <span class="m-menu__link-text">Stories</span>
-                    <i class="m-menu__ver-arrow la la-angle-right"></i>
+            <li class="m-menu__item  {{ isset($activeStory) ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
+                <a href="{{ route('story.index') }}" class="m-menu__link ">
+                    <i class="m-menu__link-icon la la-book"></i>
+                    <span class="m-menu__link-title">
+                        <span class="m-menu__link-wrap">
+                            <span class="m-menu__link-text">Story management</span>
+                        </span>
+                    </span>
                 </a>
-                <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
-                    <ul class="m-menu__subnav">
-                        <li class="m-menu__item {{ isset($activeStoryList) ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
-                            <a href="{{route('story.index')}}" class="m-menu__link ">
-                                <i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i>
-                                <span class="m-menu__link-text">Story List</span>
-                            </a>
-                        </li>
-                        <li class="m-menu__item {{ isset($activeStoryAdd) ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
-                            <a href="{{route('story.create')}}" class="m-menu__link ">
-                                <i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i>
-                                <span class="m-menu__link-text">Add New Story</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </li>
             <li class="m-menu__item  m-menu__item--submenu {{ isset($activeCategory) ? 'm-menu__item--open' : '' }}" aria-haspopup="true" m-menu-submenu-toggle="hover">
                 <a href="javascript:;" class="m-menu__link m-menu__toggle">
@@ -67,7 +54,7 @@
             </li>
             <li class="m-menu__item  m-menu__item--submenu {{ isset($activeChapter) ? 'm-menu__item--open' : '' }}" aria-haspopup="true" m-menu-submenu-toggle="hover">
                 <a href="javascript:;" class="m-menu__link m-menu__toggle">
-                    <i class="m-menu__link-icon la la-th-list"></i> <span class="m-menu__link-text">Chapters</span> <i class="m-menu__ver-arrow la la-angle-right"></i>
+                    <i class="m-menu__link-icon la la la-list"></i> <span class="m-menu__link-text">Chapters</span> <i class="m-menu__ver-arrow la la-angle-right"></i>
                 </a>
                 <div class="m-menu__submenu "><span class="m-menu__arrow"></span>
                     <ul class="m-menu__subnav">
@@ -127,11 +114,10 @@
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i>
                                 <span class="m-menu__link-text">Roles</span>
                             </a>
-                        </li>
-                        <li class="m-menu__item  {{ isset($activePermission) ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
+                        </li><li class="m-menu__item  {{ isset($activePermission) ? 'm-menu__item--active' : '' }}" aria-haspopup="true">
                             <a href="{{ route('permission.index') }}" class="m-menu__link ">
                                 <i class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i>
-                                <span class="m-menu__link-text">Permissions</span>
+                                <span class="m-menu__link-text">Permission</span>
                             </a>
                         </li>
                     </ul>

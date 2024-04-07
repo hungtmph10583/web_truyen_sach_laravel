@@ -12,6 +12,7 @@ use Illuminate\Validation\Rule;
 class PermissionController extends Controller
 {
     public function __construct() {
+        $this->middleware('role:Administrator');
         view()->share('activeUserManagement', TRUE);
         view()->share('activePermission', TRUE);
     }

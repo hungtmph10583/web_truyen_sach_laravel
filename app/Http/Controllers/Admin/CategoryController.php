@@ -10,13 +10,11 @@ use Illuminate\Validation\Rule;
 
 class CategoryController extends Controller
 {
-    public function __construct() {
-        view()->share('activeCategory', TRUE);
-    }
+    public function __construct() { view()->share('activeCategory', TRUE); }
 
     public function index()
     {
-        $categories = Category::select('id','c_name','c_slug','c_status')->latest('id')->paginate(20);
+        $categories = Category::select('id','c_name','c_status')->paginate(20);
         view()->share('activeCategoryList', TRUE);
         return view('admin.category.index', compact('categories'));
     }
@@ -77,12 +75,12 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         if (!$category) {
-            return redirect()->back()->with('danger', 'Story deleted failed!')->withInput();
+            return redirect()->back()->with('danger', 'Category deleted failed!')->withInput();
         }
         if (count($category->stories) > 0) {
             return redirect()->back()->with('danger', 'You cannot delete a category that has stories assigned')->withInput();
         }
         $category->delete();
-        return redirect()->back()->with('success', 'Story deleted successfully')->withInput();
+        return redirect()->back()->with('success', 'Category deleted successfully')->withInput();
     }
 }

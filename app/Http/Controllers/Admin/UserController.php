@@ -10,10 +10,12 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Carbon\Carbon;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     public function __construct() {
+        $this->middleware('permission:add user|edit user|delete user');
         view()->share('activeUserManagement', TRUE);
         view()->share('activeUser', TRUE);
     }
@@ -26,7 +28,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $roles = Role::get();
+        $roles = Role::select('name')->get();
         return view('admin.user.create', compact('roles'));
     }
 
@@ -36,7 +38,7 @@ class UserController extends Controller
             [
                 'name'  => 'required|max:255',
                 'email' => 'required',
-                'avatar' => 'image|mimes:jpg,png,jpeg,gì,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
+                // 'avatar' => 'image|mimes:jpg,png,jpeg,gì,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
             ],
             // [
             //     'name.required'     => 'Enter!',
@@ -49,17 +51,20 @@ class UserController extends Controller
 
         $user = new User();
         $user->fill($request->all());
+        $user->status   = 1;
+        $user->password = Hash::make(000000);
         if ($request->hasFile('avatar')) {
             $user->avatar = $request->file('avatar')->storeAs('uploads/users', uniqid() . '-' . $request->avatar->getClientOriginalName());
         }else{
-            $user->default_avatar = 'client-theme/assets/app/media/img/users/user_black_violet.jpg';
+            $user->avatar = 'admin-theme/assets/app/media/img/users/user_black_violet.jpg';
         }
         
         $user->save();
 
         if ($request->has('role')) {
-            $user->assignRoles($request->role);
+            $user->assignRole($request->role);
         }
+        return redirect()->route('user.index')->with('success', 'User created successfully');
     }
 
     public function show($id)
@@ -84,14 +89,38 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user   = User::find($id);
-        if (!$user) {
-            return redirect()->with('danger','The user was not found in the database');
+        $request->validate(
+            [
+                'name'  => 'required|max:255',
+                'email' => 'required',
+                // 'avatar' => 'image|mimes:jpg,png,jpeg,gì,svg|max:2048|dimensions:min_width=100,min_height=100,max_width=1000,max_height=1000',
+            ]
+        );
+        $user = User::find($id); 
+        if (!$user) { return redirect()->route('user.index')->with('danger', 'User updated failed'); }
+        if ($request->hasFile('uploadfile')) {
+            $user->avatar = $request->file('uploadfile')->storeAs('uploads/users', uniqid() . '-' . $request->avatar->getClientOriginalName());
         }
+        $user->fill($request->all());
+        $user->save();
+        if ($request->has('role')) {
+            if (!$user->roles->isEmpty()) {
+                $user->syncRoles([]);
+                $user->assignRole($request->role);
+            }
+            $user->assignRole($request->role);
+        }
+        return redirect()->route('user.index')->with('success', 'User updated successfully');
     }
 
     public function destroy($id)
     {
-        dd('destroy controller');
+        $user = User::find($id);
+        if (!$user) { return redirect()->route('user.index')->with('danger', 'User deteled failed'); }
+        if (count($user->roles) > 0) {
+            return redirect()->route('user.index')->with('danger', 'You can not delete a user that already has roles');
+        }
+        $user->delete();
+        return redirect()->route('user.index')->with('success', 'User deteled successfully');
     }
 }

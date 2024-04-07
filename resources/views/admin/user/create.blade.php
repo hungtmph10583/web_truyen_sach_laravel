@@ -94,7 +94,7 @@
                                 <select class="form-control m-bootstrap-select m_selectpicker" name="role" data-live-search="true" tabindex="-98">
                                 <option value="" class="m--hide">Nothing selected</option>
                                 @foreach($roles as $item)
-                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->name }}" {{ old('role') == $item->name ? 'selected' : '' }}>{{ $item->name }}</option>
                                 @endforeach
                                 </select>
                             </div>

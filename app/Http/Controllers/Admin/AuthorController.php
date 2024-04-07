@@ -10,13 +10,11 @@ use Illuminate\Validation\Rule;
 
 class AuthorController extends Controller
 {
-    public function __construct() {
-        view()->share('activeAuthor', TRUE);
-    }
+    public function __construct() { view()->share('activeAuthor', TRUE); }
     
     public function index()
     {
-        $authors = Author::select('id','a_name','created_at')->latest('id')->paginate(20);
+        $authors = Author::select('id','a_name','created_at')->withCount('stories')->paginate(20);
         view()->share('activeAuthorList', TRUE);
         return view('admin.author.index', compact('authors'));
     }
@@ -34,18 +32,16 @@ class AuthorController extends Controller
             'a_name.unique'   => 'Author name already exists!',
             'a_name.max'      => 'Author names cannot exceed 255 characters!'
         ]);
-
         $author = new Author();
         $author->fill($request->all());
         $author->a_slug = \Str::slug($request->a_name);
         $author->save();
-
         return redirect()->route('author.index')->with('success', 'Author created successfully');
     }
 
     public function edit($id)
     {
-        $author = Author::find($id);
+        $author = Author::select('a_name','a_status')->find($id);
         return view('admin.author.edit', compact('author'));
     }
 

@@ -13,6 +13,7 @@ use Spatie\Permission\Models\Permission;
 class RoleController extends Controller
 {
     public function __construct() {
+        $this->middleware('role:Administrator');
         view()->share('activeUserManagement', TRUE);
         view()->share('activeRole', TRUE);
     }

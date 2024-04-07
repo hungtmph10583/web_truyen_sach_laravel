@@ -12,17 +12,19 @@ use Illuminate\Support\Facades\DB;
 
 class ChapterController extends Controller
 {
-    public function __construct() {
-        view()->share('activeChapter', TRUE);
+    public function __construct()
+    {
+        $this->middleware('permission:create chapter', ['only' => ['create','store']]);
+        $this->middleware('permission:update chapter', ['only' => ['update','edit']]);
+        $this->middleware('permission:delete chapter', ['only' => ['destroy']]);
+        view()->share('activeChapter', TRUE); 
     }
 
     public function index()
     {
         view()->share('activeChapterList', TRUE);
         $chapters   = Chapter::select(['id','c_name','c_slug','c_story_id'])->with('story:id,s_name,s_slug')->paginate(20);
-        $getData = [
-            'chapters' => $chapters,
-        ];
+        $getData = [ 'chapters' => $chapters ];
         return view('admin.chapter.index', $getData);
     }
 
@@ -78,24 +80,17 @@ class ChapterController extends Controller
 
     public function show($s_slug, $c_slug)
     {
-        $story = Story::where('s_slug', $s_slug)->first();
-        $chapter = Chapter::with('story:id,s_name')->where('c_story_id', $story->id)->where('c_slug', $c_slug)->first();
-        $viewData = [
-            'story' => $story,
-            'chapter' => $chapter,
-        ];
+        $story = Story::select(['id','s_name','s_thumbnail','s_status','s_author_id'])->where('s_slug', $s_slug)->first();
+        $chapter = Chapter::select(['c_name','c_content'])->where('c_story_id', $story->id)->where('c_slug', $c_slug)->first();
+        $viewData = [ 'story' => $story, 'chapter' => $chapter ];
         return view('admin.chapter.show', $viewData);
     }
 
     public function edit($c_slug)
     {
         $chapter    = Chapter::where('c_slug', $c_slug)->first();
-        $stories    = Story::get();
-
-        $getData    = [
-            'chapter'   => $chapter,
-            'stories'   => $stories,
-        ];
+        $stories    = Story::select('id','s_name')->get();
+        $getData    = [ 'chapter' => $chapter, 'stories' => $stories ];
         return view('admin.chapter.edit', $getData);
     }
 

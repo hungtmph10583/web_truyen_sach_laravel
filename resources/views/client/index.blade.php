@@ -1,50 +1,5 @@
 @extends('layouts.client.app')
 @section('content')
-<!-- Hero Section Begin -->
-    <!-- <section class="hero">
-        <div class="container">
-            <div class="hero__slider owl-carousel">
-                <div class="hero__items set-bg" data-setbg="{{ asset('client-theme/img/hero/hero-1.jpg') }}">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <div class="label">Adventure</div>
-                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
-                                <p>After 30 days of travel across the world...</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero__items set-bg" data-setbg="{{ asset('client-theme/img/hero/hero-1.jpg')}}">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <div class="label">Adventure</div>
-                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
-                                <p>After 30 days of travel across the world...</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero__items set-bg" data-setbg="{{ asset('client-theme/img/hero/hero-1.jpg')}}">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <div class="label">Adventure</div>
-                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
-                                <p>After 30 days of travel across the world...</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
-    <!-- Hero Section End -->
-
     <!-- Product Section Begin -->
     <section class="product spad">
         <div class="container">
@@ -70,8 +25,8 @@
                                     <a href="{{ route('client.story', [$h_story->s_slug]) }}">
                                         <div class="product__item__pic set-bg" data-setbg="{{ $h_story->s_thumbnail }}">
                                             <div class="hot">HOT</div>
-                                            <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                            <!-- <div class="comment"><i class="fa fa-comments"></i> 11</div> -->
+                                            <div class="view"><i class="fa fa-eye"></i> {{ $h_story->s_view }}</div>
                                         </div>
                                     </a>
                                     <div class="product__item__text">
@@ -102,16 +57,18 @@
                             @foreach($new_stories as $n_story)
                             <div class="col-lg-3 col-md-4 col-sm-4 col-6">
                                 <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="{{ $n_story->s_thumbnail }}">
-                                        <div class="new">NEW</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
+                                    <a href="{{ route('client.story', [$n_story->s_slug]) }}">
+                                        <div class="product__item__pic set-bg" data-setbg="{{ $n_story->s_thumbnail }}">
+                                            <div class="new">NEW</div>
+                                            <!-- <div class="comment"><i class="fa fa-comments"></i> 11</div> -->
+                                            <div class="view"><i class="fa fa-eye"></i> {{ $n_story->s_view }}</div>
+                                        </div>
+                                    </a>
                                     <div class="product__item__text">
                                         <ul>
                                             <li>{{ $n_story->author->a_name }}</li>
                                         </ul>
-                                        <h5><a href="#">{{ $n_story->s_name }}</a></h5>
+                                        <h5><a href="{{ route('client.story', [$n_story->s_slug]) }}">{{ $n_story->s_name }}</a></h5>
                                     </div>
                                 </div>
                             </div>
@@ -135,16 +92,18 @@
                             @foreach($full_stories as $f_story)
                             <div class="col-lg-3 col-md-4 col-sm-4 col-6">
                                 <div class="product__item">
-                                    <div class="product__item__pic set-bg" data-setbg="{{ $f_story->s_thumbnail }}">
-                                        <div class="full">FULL</div>
-                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                    </div>
+                                    <a href="{{ route('client.story', [$f_story->s_slug]) }}">
+                                        <div class="product__item__pic set-bg" data-setbg="{{ $f_story->s_thumbnail }}">
+                                            <div class="full">FULL</div>
+                                            <!-- <div class="comment"><i class="fa fa-comments"></i> 11</div> -->
+                                            <div class="view"><i class="fa fa-eye"></i> {{ $f_story->s_view }}</div>
+                                        </div>
+                                    </a>
                                     <div class="product__item__text">
                                         <ul>
                                             <li>Chương 120</li>
                                         </ul>
-                                        <h5><a href="#">{{ $f_story->s_name }}</a></h5>
+                                        <h5><a href="{{ route('client.story', [$f_story->s_slug]) }}">{{ $f_story->s_name }}</a></h5>
                                     </div>
                                 </div>
                             </div>
@@ -152,7 +111,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-12">
+                <div class="col-lg-4 col-md-12 sidebar__category">
                     <div class="book-list mb-5">
                         <div class="section-title">
                             <h5>Thể loại truyện</h5>
@@ -167,59 +126,22 @@
                         <div class="section-title">
                             <h5>TRUYỆN ĐỀ CỬ</h5>
                         </div>
+                        @foreach($recommends as $recommend)
                         <div class="product__sidebar__comment__item">
                             <div class="product__sidebar__comment__item__pic">
-                                <a href="{{ route('client.story', $find->s_slug) }}"><img src="{{ $find->s_thumbnail }}" alt=""></a>
+                                <a href="{{ route('client.story', $recommend->s_slug) }}"><img loading="lazy" src="{{ $recommend->s_thumbnail }}" alt=""></a>
                             </div>
                             <div class="product__sidebar__comment__item__text">
-                                <h5><a href="{{ route('client.story', $find->s_slug) }}">{{ $find->s_name }}</a></h5>
+                                <h5><a href="{{ route('client.story', $recommend->s_slug) }}">{{ $recommend->s_name }}</a></h5>
                                 <ul>
-                                    @foreach($find->categories as $_c)
+                                    @foreach($recommend->categories as $_c)
                                     <li>{{ $_c->c_name }}</li>
                                     @endforeach
                                 </ul>
-                                <span><i class="fa fa-eye"></i> 19.141 Lượt đọc</span>
+                                <span><i class="fa fa-eye"></i> {{ $recommend->s_view }} Lượt đọc</span>
                             </div>
                         </div>
-                        <div class="product__sidebar__comment__item">
-                            <div class="product__sidebar__comment__item__pic">
-                                <img src="{{ asset('client-theme/img/sidebar/comment-2.jpg') }}" alt="">
-                            </div>
-                            <div class="product__sidebar__comment__item__text">
-                                <ul>
-                                    <li>Active</li>
-                                    <li>Movie</li>
-                                </ul>
-                                <h5><a href="#">Shirogane Tamashii hen Kouhan sen</a></h5>
-                                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                            </div>
-                        </div>
-                        <div class="product__sidebar__comment__item">
-                            <div class="product__sidebar__comment__item__pic">
-                                <img src="{{ asset('client-theme/img/sidebar/comment-3.jpg') }}" alt="">
-                            </div>
-                            <div class="product__sidebar__comment__item__text">
-                                <ul>
-                                    <li>Active</li>
-                                    <li>Movie</li>
-                                </ul>
-                                <h5><a href="#">Kizumonogatari III: Reiket su-hen</a></h5>
-                                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                            </div>
-                        </div>
-                        <div class="product__sidebar__comment__item">
-                            <div class="product__sidebar__comment__item__pic">
-                                <img src="{{ asset('client-theme/img/sidebar/comment-4.jpg') }}" alt="">
-                            </div>
-                            <div class="product__sidebar__comment__item__text">
-                                <ul>
-                                    <li>Active</li>
-                                    <li>Movie</li>
-                                </ul>
-                                <h5><a href="#">Monogatari Series: Second Season</a></h5>
-                                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

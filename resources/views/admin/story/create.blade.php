@@ -2,132 +2,157 @@
 @section('title', 'Add New Story')
 @section('subheader__title', 'Add New Story')
 @section('content')
+
+@section('subheader__breadcrumbs')
+    <li class="m-nav__separator">-</li>
+    <li class="m-nav__item">
+        <a href="{{ route('story.index') }}" class="m-nav__link">
+            <span class="m-nav__link-text">List of stories</span>
+        </a>
+    </li>
+    <li class="m-nav__separator">-</li>
+    <li class="m-nav__item">
+        <span class="m-nav__link-text">Create new story</span>
+    </li>
+@endsection
 <div class="m-content">
-    <!-- <div class="alert alert-brand m-alert m-alert--icon m-alert--air m-alert--square m--margin-bottom-30" role="alert">
-        <div class="m-alert__icon">
-            <i class="flaticon-exclamation-1"></i>
-        </div>
-        <div class="m-alert__text">
-            jQuery Idle Timer fires a custom event when the user is "idle". To learn more please check out
-            <a href="https://github.com/thorst/jquery-idletimer" class="m-link m-link--warning m--font-bold" target="_blank">
-                the plugin's official homepage
-            </a>
-        </div>
-    </div> -->
-    <!--Begin::Section-->
-    <div class="m-portlet m-portlet--mobile ">
-        <div class="m-portlet__head">
-            <div class="m-portlet__head-caption">
-                <div class="m-portlet__head-title">
-                    <h3 class="m-portlet__head-text">
-                        Add New Story
-                    </h3>
-                </div>
-            </div>
-        </div>
-        <form method="POST" action="" enctype="multipart/form-data" class="m-form m-form--fit m-form--label-align-right">
-        @csrf
-            <div class="m-portlet__body">
-                <div class="m-form__section m-form__section--first">
-                    <div class="m-form__heading">
-                        <h3 class="m-form__heading-title">Main information of the story</h3>
-                    </div>
-                    <div class="form-group m-form__group row">
-                        <label class="col-lg-3 col-form-label">Story name</label>
-                        <div class="col-lg-6">
-                            <input type="text" name="s_name" class="form-control m-input" value="{{ old('s_name') }}" placeholder="Enter the story's name">
-                            @error('s_name')
-                                <span class="form__help text-danger">{{$message}}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                        <label class="col-form-label col-lg-3 col-sm-12">Categoties</label>
-                        <div class="col-lg-6 col-md-9 col-sm-12">
-                            <select name="sc_stories_categories[]" class="form-control m-bootstrap-select m_selectpicker" multiple data-actions-box="true">
-                                @foreach($categories as $category)
-                                    <option value="{{$category->id}}">{{$category->c_name}}</option>
-                                @endforeach
-                            </select>
-                            @error('sc_stories_categories')
-                                <span class="form__help text-danger">{{$message}}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="m-form__seperator m-form__seperator--dashed"></div>
-                    <div class="form-group m-form__group row">
-                        <label class="col-lg-3 col-form-label">Author of the story</label>
-                        <div class="col-lg-6">
-                            <input type="text" name="s_author_id" class="form-control m-input" value="{{ old('s_author_id') }}" placeholder="Enter the story's name">
-                            @error('s_author_id')
-                                <span class="form__help text-danger">{{$message}}</span>
-                            @enderror
-                        </div>  
-                    </div>
-                    <div class="m-form__seperator m-form__seperator--dashed"></div>
-                    <div class="form-group m-form__group row">
-                        <label class="col-lg-3 col-form-label">Thumbnail of the story</label>
-                        <div class="col-lg-6">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="uploadImage" name="s_thumbnail">
-                                <label class="custom-file-label" for="Chọn file">Select file image</label>
-                            </div>
-                            @error('s_thumbnail')
-                                <span class="form__help text-danger">{{$message}}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                        <label class="col-lg-4"></label>
-                        <div class="col-lg-4">
-                            <img src="" class="img-fluid" id="preImage" alt="Thumbnail" >
-                        </div>
+    <div class="row">
+        <div class="col-xl-9 col-lg-8">
+            <div class="m-portlet m-portlet--full-height m-portlet--tabs  ">
+                <div class="m-portlet__head">
+                    <div class="m-portlet__head-tools">
+                        <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+                            <li class="nav-item m-tabs__item">
+                                <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
+                                    <i class="flaticon-share m--hide"></i>
+                                    Story information
+                                </a>
+                            </li>
+                            <li class="nav-item m-tabs__item">
+                                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab">
+                                    Classify
+                                </a>
+                            </li>
+                            <!-- <li class="nav-item m-tabs__item">
+                                <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
+                                    Chapter
+                                </a>
+                            </li> -->
+                        </ul>
                     </div>
                 </div>
-                <div class="m-form__seperator m-form__seperator--dashed"></div>
-                <div class="m-form__section m-form__section--last">
-                    <div class="m-form__heading">
-                        <h3 class="m-form__heading-title">Additional information</h3>
-                    </div>
-                    <div class="m-form__group form-group row">
-                        <label class="col-lg-3 col-form-label">Status</label>
-                        <div class="col-lg-6">
-                            <div class="m-radio-inline">
-                                <label class="m-radio m-radio--solid">
-                                    <input type="radio" name="s_status" checked value="1"> Đã hoàn tất
-                                    <span></span>
-                                </label>
-                                <label class="m-radio m-radio--solid">
-                                    <input type="radio" name="s_status" value="0"> Đang tiến hành
-                                    <span></span>
-                                </label>
+                <form class="m-form m-form--fit m-form--label-align-right">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="m_user_profile_tab_1">
+                            <div class="m-portlet__body">
+                                <div class="form-group m-form__group">
+                                    <label for="s_name">
+                                        <span class="m--font-boldest">Story name<span class="m--font-danger">*</span></span>
+                                    </label>
+                                    <input type="text" name="s_name" id="s_name" class="form-control m-input" value="{{ old('s_name') }}" placeholder="Enter the story's name">
+                                    @error('s_name')
+                                        <span class="form__help text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                                <div class="form-group m-form__group">
+                                    <label for="uploadImage"><span class="m--font-boldest">Thumbnail</span></label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="uploadImage" name="s_thumbnail">
+                                        <label class="custom-file-label" for="Chọn file">Select file image</label>
+                                    </div>
+                                    @error('s_thumbnail')
+                                        <span class="form__help text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group m-form__group">
+                                    <label for="uploadPoster"><span class="m--font-boldest">Poster</span></label>
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" id="uploadPoster" name="s_poster">
+                                        <label class="custom-file-label" for="Chọn file">Select file image</label>
+                                    </div>
+                                    @error('s_poster')
+                                        <span class="form__help text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+                                <div class="form-group m-form__group">
+                                    <label for="s_description">
+                                        <span class="m--font-boldest">Description</span>
+                                    </label>
+                                    <textarea name="s_description" id="s_description" class="form-control" data-provide="markdown" rows="10">{{ old('s_description') }}</textarea>
+                                    @error('s_description')
+                                        <span class="form__help text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group m-form__group row">
-                        <label class="col-lg-3 col-form-label">Description</label>
-                        <div class="col-lg-6">
-                            <textarea name="s_description" class="form-control" data-provide="markdown" rows="10">{{ old('s_description') }}</textarea>
+                        <div class="tab-pane " id="m_user_profile_tab_2">
+                            <div class="m-portlet__body">
+                                <div class="form-group m-form__group">
+                                    <label for="s_name">
+                                        <span class="m--font-boldest">Author</span>
+                                    </label>
+                                    <input type="text" name="s_author_id" class="form-control m-input" value="{{ old('s_author_id') }}" placeholder="Enter the story's name">
+                                    @error('s_author_id')
+                                        <span class="form__help text-danger">{{$message}}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group m-form__group">
+                                    <label for="s_name">
+                                        <span class="m--font-boldest">Status</span>
+                                    </label>
+                                    <div class="m-radio-inline">
+                                        <label class="m-radio m-radio--solid">
+                                            <input type="radio" name="s_status" checked value="1"> Đã hoàn tất
+                                            <span></span>
+                                        </label>
+                                        <label class="m-radio m-radio--solid">
+                                            <input type="radio" name="s_status" value="0"> Đang tiến hành
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group m-form__group">
+                                    <label class="col-form-label">
+                                        <span class="m--font-boldest">Category<span class="m--font-danger">*</span></span>
+                                    </label>
+                                    <div class="m-checkbox-list">
+                                        <div class="row">
+                                            @foreach($categories as $item)
+                                            <div class="col-4">
+                                                <label class="m-checkbox m-checkbox--solid m-checkbox--brand">
+                                                    <input type="checkbox" name="sc_stories_categories[]"> {{ $item->c_name }}
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                            @endforeach
+                                        </div>
+                                        @error('sc_stories_categories')
+                                            <span class="form__help text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane " id="m_user_profile_tab_3">
+                            chapter
                         </div>
                     </div>
-                </div>
+                    <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+                        <div class="m-form__actions m-form__actions--solid">
+                            <div class="row">
+                                <div class="col-lg-10 m--align-right">
+                                    <a href="{{ route('story.index') }}" class="btn btn-secondary"><i class="la la-ban"></i> Cancel</a>
+                                    <button type="submit" class="btn btn-primary">Save story</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
-                <div class="m-form__actions m-form__actions--solid">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <!-- <button type="reset" class="btn btn-danger">Delete</button> -->
-                        </div>
-                        <div class="col-lg-3 m--align-right">
-                            <button type="reset" class="btn btn-secondary">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Add new story</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
+        </div>
     </div>
-    <!--End::Section-->
 </div>
 @endsection
 @section('pagejs')
